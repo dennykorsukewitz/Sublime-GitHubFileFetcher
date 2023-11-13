@@ -52,7 +52,7 @@ The following steps are performed one after the other.
 **Shortcut:** ```strg + alt + k, f```<br>
 **Command:**  ```GitHubFileFetcher: Searches and fetches files from GitHub.```
 
-![GitHubFileFetcher](doc/images/GitHubFileFetcher.gif)
+![GitHubFileFetcher](doc/images/githubfilefetcher.gif)
 
 ### Settings
 
