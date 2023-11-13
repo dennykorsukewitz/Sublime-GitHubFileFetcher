@@ -1,0 +1,50 @@
+[
+    {
+        "caption": "Preferences",
+        "mnemonic": "n",
+        "id": "preferences",
+        "children":
+        [
+            {
+                "caption": "Package Settings",
+                "mnemonic": "P",
+                "id": "package-settings",
+                "children":
+                [
+                    {
+                        "caption": "GitHub File Fetcher",
+                        "children":
+                        [
+                            {
+                                "caption": "README",
+                                "command": "open_file",
+                                "args":
+                                {
+                                    "file": "${packages}/GitHubFileFetcher/README.md"
+                                }
+                            },
+                            {
+                                "caption": "Settings",
+                                "command": "edit_settings",
+                                "args":
+                                {
+                                    "base_file": "${packages}/GitHubFileFetcher/GitHubFileFetcher.sublime-settings",
+                                    "default": "{\n$0\n}\n"
+                                },
+                            },
+                            {
+                                "caption": "Key Bindings",
+                                "command": "edit_settings",
+                                "args":
+                                {
+                                    "base_file": "${packages}/GitHubFileFetcher/Default.sublime-keymap",
+                                    "default": "{\n$0\n}\n"
+                                },
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

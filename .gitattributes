@@ -1,0 +1,12 @@
+# Exclude files from exporting
+
+## Graphics
+*.png      export-ignore
+*.jpg      export-ignore
+*.jpeg     export-ignore
+*.gif      export-ignore
+*.tif      export-ignore
+*.tiff     export-ignore
+*.ico      export-ignore
+*.svg      export-ignore
+*.eps      export-ignore

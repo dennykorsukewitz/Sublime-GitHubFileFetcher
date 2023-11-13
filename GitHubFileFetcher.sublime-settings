@@ -1,0 +1,17 @@
+{
+    // Information messages will be displayed.
+    // - "false"   => "No, nothing will be displayed.",
+    // - "true"    => "Yes, the normal information will be displayed.",
+    // - "verbose" => "Yes, all the information will be displayed."
+    "information_messages": "true",
+
+    // The GitHub API is limited to 60 requests per hour for non authorized requests. You can provide your GitHub username and an access token to push this limit to 5000 requests per hour. Please see the [official github doc](https://docs.github.com/en/free-pro-team@latest/rest/rate-limit/rate-limit?apiVersion=2022-11-28) for further information.
+    // You can generate the access token in your [github settings](https://github.com/settings/tokens).
+    "github_username": "",
+    "github_token": "",
+
+    // List of possible GitHub repositories. GitHub {owner}/{repo}.
+    "repositories": [
+        "dennykorsukewitz/VSCode-GitHubFileFetcher"
+    ]
+}

@@ -1,0 +1,3 @@
+[
+    { "caption": "GitHubFileFetcher: Searches and fetches files from GitHub.", "command": "git_hub_file_fetcher" },
+]

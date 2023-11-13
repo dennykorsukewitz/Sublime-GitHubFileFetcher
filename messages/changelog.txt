@@ -1,0 +1,11 @@
+Changelog
+
+All notable changes to the "GitHubFileFetcher" package will be documented in this file.
+
+---
+
+Version 1.0.0
+
+Initial release of GitHubFileFetcher package.
+
+- Searches and fetches files from GitHub.
