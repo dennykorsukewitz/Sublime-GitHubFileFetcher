@@ -2,7 +2,7 @@
 
 # GitHubFileFetcher
 
-**GitHubFileFetcher** is a Sublime Text 2/3 package that searches and fetches files from GitHub.
+**GitHubFileFetcher** is a Sublime Text package that searches and fetches files from GitHub.
 
 | Repository | GitHub | Sublime Text |
 | ------ | ------ | ------ |

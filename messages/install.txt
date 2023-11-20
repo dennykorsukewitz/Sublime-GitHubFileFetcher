@@ -1,6 +1,6 @@
 ⭐ Congratulations ⭐
 
-**GitHubFileFetcher** is an extension that searches and fetches files from GitHub.
+**GitHubFileFetcher** is a Sublime Text package that searches and fetches files from GitHub.
 
 The following steps are performed one after the other.
 
