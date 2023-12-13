@@ -1,13 +1,9 @@
 [
     {
-        "caption": "Preferences",
-        "mnemonic": "n",
         "id": "preferences",
         "children":
         [
             {
-                "caption": "Package Settings",
-                "mnemonic": "P",
                 "id": "package-settings",
                 "children":
                 [
@@ -29,15 +25,6 @@
                                 "args":
                                 {
                                     "base_file": "${packages}/GitHubFileFetcher/GitHubFileFetcher.sublime-settings",
-                                    "default": "{\n$0\n}\n"
-                                },
-                            },
-                            {
-                                "caption": "Key Bindings",
-                                "command": "edit_settings",
-                                "args":
-                                {
-                                    "base_file": "${packages}/GitHubFileFetcher/Default.sublime-keymap",
                                     "default": "{\n$0\n}\n"
                                 },
                             }

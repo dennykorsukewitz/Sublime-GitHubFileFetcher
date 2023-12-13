@@ -103,8 +103,7 @@ Download latest [sublime-package file](https://github.com/dennykorsukewitz/Subli
 
 ### 3. Source code
 
-Clone the latest [dev branch](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher) and unpack it to Sublime Package folder
-`Packages`.
+Clone the latest [dev branch](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher) and unpack it to Sublime Package folder `Packages`.
 
 #### OSX
 
