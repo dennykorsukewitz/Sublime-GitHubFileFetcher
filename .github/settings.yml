@@ -9,7 +9,7 @@ repository:
   homepage: https://dennykorsukewitz.github.io/Sublime-GitHubFileFetcher/
 
   # A comma-separated list of topics to set on the repository
-  topics: pages, sublime, sublime-text, sublime-package,  workflow, helper, github, file, files, fetch, fetcher, grab, download, get
+  topics: pages, metrics-sublime, sublime, sublime-text, sublime-package,  workflow, helper, github, file, files, fetch, fetcher, grab, download, get
 
   # Either `true` to make the repository private, or `false` to make it public.
   private: false

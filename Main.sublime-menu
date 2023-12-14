@@ -27,7 +27,7 @@
                                     "base_file": "${packages}/GitHubFileFetcher/GitHubFileFetcher.sublime-settings",
                                     "default": "{\n$0\n}\n"
                                 },
-                            }
+                            },
                         ]
                     }
                 ]
