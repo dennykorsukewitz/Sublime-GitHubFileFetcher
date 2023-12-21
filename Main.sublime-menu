@@ -28,6 +28,15 @@
                                     "default": "{\n$0\n}\n"
                                 },
                             },
+                            {
+                                "caption": "Key Bindings",
+                                "command": "edit_settings",
+                                "args":
+                                {
+                                    "base_file": "${packages}/GitHubFileFetcher/Default.sublime-keymap",
+                                    "default": "{\n$0\n}\n"
+                                },
+                            }
                         ]
                     }
                 ]
