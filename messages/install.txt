@@ -46,6 +46,6 @@ Your [Denny Korsukéwitz](https://github.com/dennykorsukewitz) 🚀
 
 -------------------
 
-🌟 Version 1.0.0 🌟 - Feature List
+🌟 Version 1.0.1 🌟 - Feature List
 
 - Searches and fetches files from GitHub.

@@ -1,8 +1,7 @@
-🌟 Version 1.0.0 🌟
+🌟 Version 1.0.1 🌟
 
-Initial release of GitHubFileFetcher package.
-
-- Searches and fetches files from GitHub.
+- Updated Main menu and README.md.
+- Added keymaps.
 
 GitHub link - https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher
 
