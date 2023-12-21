@@ -49,6 +49,7 @@ The following steps are performed one after the other.
     So that you don't have to search for the repositories again and again,
     you can save the currently used one in the settings.
 
+**Shortcut:** ```strg + alt + k, f```<br>
 **Command:**  ```GitHubFileFetcher: Searches and fetches files from GitHub.```
 
 ![GitHubFileFetcher](doc/images/githubfilefetcher.gif)

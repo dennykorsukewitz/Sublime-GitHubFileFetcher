@@ -1,0 +1,3 @@
+[
+    { "keys": ["ctrl+alt+k", "f"], "command": "git_hub_file_fetcher" },
+]
