@@ -13,7 +13,7 @@
 
 | Status |
 | ------ |
-| [![GitHub commits since tagged version](https://img.shields.io/github/commits-since/dennykorsukewitz/Sublime-GitHubFileFetcher/1.0.0/dev)](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher/compare/1.0.0...dev) ![GitHub Workflow Lint](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher/actions/workflows/lint.yml/badge.svg?branch=dev&style=flat&label=Lint) ![GitHub Workflow Pages](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher/actions/workflows/pages.yml/badge.svg?branch=dev&style=flat&label=GitHub%20Pages) |
+| [![GitHub commits since tagged version](https://img.shields.io/github/commits-since/dennykorsukewitz/Sublime-GitHubFileFetcher/1.0.2/dev)](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher/compare/1.0.2...dev) ![GitHub Workflow Lint](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher/actions/workflows/lint.yml/badge.svg?branch=dev&style=flat&label=Lint) ![GitHub Workflow Pages](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher/actions/workflows/pages.yml/badge.svg?branch=dev&style=flat&label=GitHub%20Pages) |
 
 ## Feature
 

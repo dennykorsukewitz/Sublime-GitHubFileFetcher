@@ -4,6 +4,10 @@ All notable changes to the "GitHubFileFetcher" package will be documented in thi
 
 ---
 
+Version 1.0.2
+- Updated README.md.
+- Updated package structure [generator-sublime-package](https://github.com/dennykorsukewitz/generator-sublime-package).
+
 Version 1.0.1
 - Updated Main menu and README.md.
 - Added keymaps.

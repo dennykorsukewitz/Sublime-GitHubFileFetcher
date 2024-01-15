@@ -1,7 +1,7 @@
-🌟 Version 1.0.1 🌟
+🌟 Version 1.0.2 🌟
 
-- Updated Main menu and README.md.
-- Added keymaps.
+- Updated README.md.
+- Updated package structure [generator-sublime-package](https://github.com/dennykorsukewitz/generator-sublime-package).
 
 GitHub link - https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher
 
