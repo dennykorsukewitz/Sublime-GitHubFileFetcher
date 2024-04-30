@@ -52,7 +52,9 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
         # Status Message
         if self.information_messages != "false":
-            self.message = "GitHubFileFetcher (1/6): Fetching GitHub repositories."
+            self.message = (
+                "GitHubFileFetcher (1/6): Fetching GitHub repositories."  # noqa: E501
+            )
             sublime.status_message(self.message)
             print(self.message)
 
@@ -63,7 +65,7 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
             flags=32,
             selected_index=-1,
             on_highlight=None,
-            placeholder="GitHubFileFetcher (1/6): Search/Select GitHub repositories...",
+            placeholder="GitHubFileFetcher (1/6): Search/Select GitHub repositories...",  # noqa: E501
         )
 
     def repository_get(self, index):
