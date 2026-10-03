@@ -489,6 +489,9 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
         json_result = self.url_content(url)
 
+        if json_result is None:
+            return None
+
         # Log.
         if self.information_messages == "verbose":
             self.message = "GitHubFileFetcher: Successfully fetch from '%s'" % (url)
@@ -503,6 +506,9 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
     def url_content(self, url):
 
         req = self.url_request(url)
+
+        if req is None:
+            return None
 
         return req.read().decode(req.headers.get_content_charset())
 
