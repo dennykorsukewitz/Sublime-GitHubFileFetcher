@@ -9,8 +9,10 @@ import sublime_plugin
 try:
     from urllib.error import URLError
     from urllib.request import Request, urlopen
+    from urllib.parse import quote
 except ImportError:
     from urllib2 import URLError, urlopen
+    from urllib import quote
 
 
 def plugin_loaded():
@@ -110,11 +112,16 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
     def repository_search(self, search_string):
 
+        # Reset accumulated state so each search starts fresh
+        self.found_repositories = []
+        self.new_repo_found = 0
+
         if self.owner_repository == self.search_owner_string:
             search_string += "/"
 
         url = "https://api.github.com/search/repositories?q="
-        url += search_string
+        url += quote(search_string, safe='')
+
 
         # Log.
         if self.information_messages == "verbose":
@@ -278,8 +285,8 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
         url = "https://api.github.com/repos/%s/contents/%s?ref=%s" % (
             self.owner_repository,
-            file_path,
-            self.branch,
+            quote(file_path, safe=''),
+            quote(self.branch, safe=''),
         )
 
         # Log
