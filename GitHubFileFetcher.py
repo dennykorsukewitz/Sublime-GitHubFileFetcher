@@ -293,7 +293,7 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
         file_json = self.url_json(url)
 
         content = base64.decodebytes(file_json["content"].encode("utf-8")).decode(
-            "utf-8"
+            "utf-8", errors="replace"
         )
 
         # Log
@@ -344,11 +344,15 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
             )
 
         else:
+            if not self.folders:
+                sublime.error_message("GitHubFileFetcher: No folder is open in the workspace. Open a folder first, then try again.")
+                return
             self.file["folder"] = self.folders[0]
             self.file_path_get()
 
     def folder_selected(self, index):
-
+        if index == -1:
+            return
         self.file["folder"] = self.folders[index]
 
         self.file_path_get()
