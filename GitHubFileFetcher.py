@@ -9,8 +9,10 @@ import sublime_plugin
 try:
     from urllib.error import URLError
     from urllib.request import Request, urlopen
+    from urllib.parse import quote
 except ImportError:
     from urllib2 import URLError, urlopen
+    from urllib import quote
 
 
 def plugin_loaded():
@@ -110,11 +112,16 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
     def repository_search(self, search_string):
 
+        # Reset accumulated state so each search starts fresh
+        self.found_repositories = []
+        self.new_repo_found = 0
+
         if self.owner_repository == self.search_owner_string:
             search_string += "/"
 
         url = "https://api.github.com/search/repositories?q="
-        url += search_string
+        url += quote(search_string, safe='')
+
 
         # Log.
         if self.information_messages == "verbose":
@@ -278,8 +285,8 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
         url = "https://api.github.com/repos/%s/contents/%s?ref=%s" % (
             self.owner_repository,
-            file_path,
-            self.branch,
+            quote(file_path, safe=''),
+            quote(self.branch, safe=''),
         )
 
         # Log
@@ -293,7 +300,7 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
         file_json = self.url_json(url)
 
         content = base64.decodebytes(file_json["content"].encode("utf-8")).decode(
-            "utf-8"
+            "utf-8", errors="replace"
         )
 
         # Log
@@ -344,11 +351,15 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
             )
 
         else:
+            if not self.folders:
+                sublime.error_message("GitHubFileFetcher: No folder is open in the workspace. Open a folder first, then try again.")
+                return
             self.file["folder"] = self.folders[0]
             self.file_path_get()
 
     def folder_selected(self, index):
-
+        if index == -1:
+            return
         self.file["folder"] = self.folders[index]
 
         self.file_path_get()
@@ -489,6 +500,9 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
         json_result = self.url_content(url)
 
+        if json_result is None:
+            return None
+
         # Log.
         if self.information_messages == "verbose":
             self.message = "GitHubFileFetcher: Successfully fetch from '%s'" % (url)
@@ -503,6 +517,9 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
     def url_content(self, url):
 
         req = self.url_request(url)
+
+        if req is None:
+            return None
 
         return req.read().decode(req.headers.get_content_charset())
 
