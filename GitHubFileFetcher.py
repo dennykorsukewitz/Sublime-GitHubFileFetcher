@@ -7,11 +7,11 @@ import sublime
 import sublime_plugin
 
 try:
-    from urllib.error import URLError
+    from urllib.error import HTTPError, URLError
     from urllib.request import Request, urlopen
     from urllib.parse import quote
 except ImportError:
-    from urllib2 import URLError, urlopen
+    from urllib2 import HTTPError, URLError, urlopen
     from urllib import quote
 
 
@@ -43,6 +43,7 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
         self.new_repo_found = 0
         self.owner_repository = ""
         self.branch = ""
+        self.last_request_error = ""
 
         self.repositories = settings.get("repositories")
         self.information_messages = settings.get("information_messages")
@@ -131,6 +132,10 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
         response = self.url_json(url)
 
+        if response is None:
+            self.show_github_request_failure()
+            return
+
         for repository in response["items"]:
             self.found_repositories.append(repository["full_name"])
 
@@ -174,6 +179,10 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
             print(self.message)
 
         branches_json = self.url_json(url)
+
+        if branches_json is None:
+            self.show_github_request_failure()
+            return
 
         self.branches = []
         for branch in branches_json:
@@ -229,6 +238,10 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
         tree = self.url_json(url)
 
+        if tree is None:
+            self.show_github_request_failure()
+            return
+
         for file in tree["tree"]:
             # skip folder names
             if file["type"] == "tree":
@@ -274,6 +287,10 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
             print(self.message)
 
         file_json = self.url_json(url)
+
+        if file_json is None:
+            self.show_github_request_failure()
+            return
 
         content = base64.decodebytes(file_json["content"].encode("utf-8")).decode(
             "utf-8", errors="replace"
@@ -472,6 +489,27 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
         with codecs.open(self.file["absolut_path"], "w", "utf-8") as file_handle:
             file_handle.write(self.file["content"])
 
+    def show_github_request_failure(self):
+
+        message = self.last_request_error or "GitHub request failed."
+        if not message.startswith("GitHubFileFetcher:"):
+            message = "GitHubFileFetcher: " + message
+        sublime.error_message(message)
+
+    def format_http_error(self, err, url):
+
+        if err.code == 403:
+            return (
+                "GitHub returned 403 (Forbidden). "
+                "Rate limit exceeded or access denied — "
+                "set github_username and github_token in GitHubFileFetcher settings."
+            )
+
+        if err.code == 404:
+            return f"GitHub returned 404 (Not Found) for:\n{url}"
+
+        return f"GitHub returned HTTP {err.code} for:\n{url}"
+
     def url_json(self, url):
 
         json_result = self.url_content(url)
@@ -501,6 +539,8 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
     def url_request(self, url):
 
+        self.last_request_error = ""
+
         request = Request(url)
 
         github_username = settings.get("github_username")
@@ -526,11 +566,19 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
             req = urlopen(request)
 
         except TypeError as err:
-            # If the arguments are malformed, display the error
-            return sublime.status_message(str(err))
+            self.last_request_error = str(err)
+            sublime.status_message(str(err))
+            return None
 
-        except URLError:
-            # Otherwise, if there was a connection error, let it be known
-            return sublime.status_message(f"Error connecting to '{url}'")
+        except HTTPError as err:
+            self.last_request_error = self.format_http_error(err, url)
+            sublime.status_message(self.last_request_error)
+            return None
+
+        except URLError as err:
+            reason = getattr(err, "reason", err)
+            self.last_request_error = f"Could not connect to GitHub ({reason})."
+            sublime.status_message(self.last_request_error)
+            return None
 
         return req

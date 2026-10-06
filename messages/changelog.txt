@@ -7,7 +7,7 @@ All notable changes to the "GitHubFileFetcher" package will be documented in thi
 Version 1.1.0
 - Fix: URL-encode search text and file paths. Thanks to @dpc00 (#1).
 - Fix: reset repository search results between queries. Thanks to @dpc00 (#2).
-- Fix: failed GitHub HTTP responses no longer cause AttributeError on read. Thanks to @dpc00 (#3).
+- Fix: failed GitHub API calls show HTTP status (403/404) in an error dialog and stop the flow cleanly. Thanks to @dpc00 (#3).
 - Fix: clear message when no workspace folder is open. Thanks to @dpc00 (#4).
 - Fix: binary files decode without UnicodeDecodeError. Thanks to @dpc00 (#5).
 - Thanks to @Jah-yee (#10) for contributing these fixes.
