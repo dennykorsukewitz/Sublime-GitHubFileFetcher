@@ -6,10 +6,10 @@
 
 | Repository | GitHub | Sublime Text |
 | ------ | ------ | ------ |
-| ![GitHub release (latest by date)](https://img.shields.io/github/v/release/dennykorsukewitz/Sublime-GitHubFileFetcher) | ![GitHub open issues](https://img.shields.io/github/issues/dennykorsukewitz/Sublime-GitHubFileFetcher) ![GitHub closed issues](https://img.shields.io/github/issues-closed/dennykorsukewitz/Sublime-GitHubFileFetcher?color=#44CC44) | ![Package Control Total](https://img.shields.io/packagecontrol/dt/GitHub%20File%20Fetcher) |
-| ![GitHub license](https://img.shields.io/github/license/dennykorsukewitz/Sublime-GitHubFileFetcher) | ![GitHub pull requests](https://img.shields.io/github/issues-pr/dennykorsukewitz/Sublime-GitHubFileFetcher?label=PR) ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/dennykorsukewitz/Sublime-GitHubFileFetcher?color=g&label=PR) | ![Package Control Month](https://img.shields.io/packagecontrol/dm/GitHub%20File%20Fetcher) |
-| ![GitHub language count](https://img.shields.io/github/languages/count/dennykorsukewitz/Sublime-GitHubFileFetcher?style=flat&label=language)  | ![GitHub contributors](https://img.shields.io/github/contributors/dennykorsukewitz/Sublime-GitHubFileFetcher) | ![Package Control Week](https://img.shields.io/packagecontrol/dw/GitHub%20File%20Fetcher) |
-| ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/dennykorsukewitz/Sublime-GitHubFileFetcher)  | ![GitHub downloads](https://img.shields.io/github/downloads/dennykorsukewitz/Sublime-GitHubFileFetcher/total?style=flat) | ![Package Control Day](https://img.shields.io/packagecontrol/dd/GitHub%20File%20Fetcher) |
+| ![GitHub release (latest by date)](https://img.shields.io/github/v/release/dennykorsukewitz/Sublime-GitHubFileFetcher) | ![GitHub open issues](https://img.shields.io/github/issues/dennykorsukewitz/Sublime-GitHubFileFetcher) ![GitHub closed issues](https://img.shields.io/github/issues-closed/dennykorsukewitz/Sublime-GitHubFileFetcher?color=#44CC44) | [![Package Control Total](https://img.shields.io/packagecontrol/dt/GitHub%20File%20Fetcher)](https://packagecontrol.io/packages/GitHub%20File%20Fetcher) |
+| ![GitHub license](https://img.shields.io/github/license/dennykorsukewitz/Sublime-GitHubFileFetcher) | ![GitHub pull requests](https://img.shields.io/github/issues-pr/dennykorsukewitz/Sublime-GitHubFileFetcher?label=PR) ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/dennykorsukewitz/Sublime-GitHubFileFetcher?color=g&label=PR) | [![Package Control Month](https://img.shields.io/packagecontrol/dm/GitHub%20File%20Fetcher)](https://packagecontrol.io/packages/GitHub%20File%20Fetcher) |
+| ![GitHub language count](https://img.shields.io/github/languages/count/dennykorsukewitz/Sublime-GitHubFileFetcher?style=flat&label=language)  | ![GitHub contributors](https://img.shields.io/github/contributors/dennykorsukewitz/Sublime-GitHubFileFetcher) | [![Package Control Week](https://img.shields.io/packagecontrol/dw/GitHub%20File%20Fetcher)](https://packagecontrol.io/packages/GitHub%20File%20Fetcher) |
+| ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/dennykorsukewitz/Sublime-GitHubFileFetcher)  | ![GitHub downloads](https://img.shields.io/github/downloads/dennykorsukewitz/Sublime-GitHubFileFetcher/total?style=flat) | [![Package Control Day](https://img.shields.io/packagecontrol/dd/GitHub%20File%20Fetcher)](https://packagecontrol.io/packages/GitHub%20File%20Fetcher) |
 
 | Status |
 | ------ |
@@ -78,9 +78,9 @@ To install this package, you have **three** options:
 
 ### 1. Search Package via `Package Control`
 
-Search and install online package via [Sublime Package Control](http://wbond.net/sublime_packages/package_control).
+Search and install via [GitHub File Fetcher on Package Control](https://packagecontrol.io/packages/GitHub%20File%20Fetcher).
 
-`Tools` -> `Command Palette` -> `Package Control: Install Package` -> simply search for `GitHubFileFetcher` to install.
+`Tools` -> `Command Palette` -> `Package Control: Install Package` -> search for `GitHub File Fetcher` (or `GitHubFileFetcher`).
 
 ### 2. Install via sublime-package file
 
