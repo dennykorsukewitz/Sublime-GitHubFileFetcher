@@ -97,7 +97,7 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
         if self.owner_repository == self.search_repo_string:
             self.value = "Repositories"
-            self.message = f"Enter GitHub {self.value}. Example: VSCode-GitHubFileFetcher"
+            self.message = f"Enter GitHub {self.value}. Example: Sublime-GitHubFileFetcher"
 
         # Create search_string input panel
         self.window.show_input_panel(

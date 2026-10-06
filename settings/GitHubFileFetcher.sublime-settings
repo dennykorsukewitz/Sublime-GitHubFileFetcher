@@ -12,6 +12,6 @@
 
     // List of possible GitHub repositories. GitHub {owner}/{repo}.
     "repositories": [
-        "dennykorsukewitz/VSCode-GitHubFileFetcher"
+        "dennykorsukewitz/Sublime-GitHubFileFetcher"
     ]
 }

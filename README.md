@@ -13,7 +13,7 @@
 
 | Status |
 | ------ |
-| [![GitHub commits since tagged version](https://img.shields.io/github/commits-since/dennykorsukewitz/Sublime-GitHubFileFetcher/1.0.2/dev)](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher/compare/1.0.2...dev) ![GitHub Workflow Lint](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher/actions/workflows/lint.yml/badge.svg?branch=dev&style=flat&label=Lint) ![GitHub Workflow Pages](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher/actions/workflows/pages.yml/badge.svg?branch=dev&style=flat&label=GitHub%20Pages) |
+| [![GitHub commits since tagged version](https://img.shields.io/github/commits-since/dennykorsukewitz/Sublime-GitHubFileFetcher/1.1.0/dev)](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher/compare/1.1.0...dev) ![GitHub Workflow Lint](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher/actions/workflows/lint.yml/badge.svg?branch=dev&style=flat&label=Lint) ![GitHub Workflow Pages](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher/actions/workflows/pages.yml/badge.svg?branch=dev&style=flat&label=GitHub%20Pages) |
 
 ## Feature
 
@@ -34,7 +34,7 @@ The following steps are performed one after the other.
 
 **4. GitHubFileFetcher (4/6):** Fetching destination folder.
 
-    Finally, the destination folder must be selected.
+    Pick the workspace folder where the file should be written. At least one folder must be open in the window; otherwise an error dialog is shown instead of crashing.
 
 **5. GitHubFileFetcher (5/6):** Enter or change destination file path...
 
@@ -42,7 +42,9 @@ The following steps are performed one after the other.
 
 **6. GitHubFileFetcher (6/6):** Added file.
 
-    `Hocus Pocus` - The file was created at the desired location.
+    `Hocus Pocus` - The file was created at the desired location. File content is fetched from the GitHub API (URL-encoded paths, UTF-8 decode with replacement for non-text bytes).
+
+Failed GitHub requests (for example 403 rate limit, 404, or connection errors) show an error dialog with HTTP status when available and stop the workflow cleanly.
 
 **GitHubFileFetcher:** Should I save the new repository in the settings?
 
@@ -56,14 +58,14 @@ The following steps are performed one after the other.
 
 ### Settings
 
-`Preferences -> Settings -> Extensions -> GitHubFileFetcher`
+`Preferences` → `Package Settings` → `GitHubFileFetcher` → `Settings`
 
 | Name | Description | Default Value |
 | - | - | - |
-| information_messages | Information messages will be displayed. | true |
-| github_username | GitHub username | dennykorsukewitz |
-| github_token | GitHub token | 123xxx789 |
-| repositories | List of possible GitHub repositories. GitHub {owner}/{repo}. | dennykorsukewitz/Sublime-GitHubFileFetcher |
+| information_messages | Status output: `"false"`, `"true"`, or `"verbose"`. | `"true"` |
+| github_username | GitHub username for authenticated API requests. | `""` |
+| github_token | GitHub personal access token. | `""` |
+| repositories | Saved repositories as `{owner}/{repo}`. | `["dennykorsukewitz/Sublime-GitHubFileFetcher"]` |
 
 The GitHub API is limited to 60 requests per hour for non authorized requests. You can provide your GitHub username and an access token to push this limit to 5000 requests per hour. Please see the [official GitHub doc](https://docs.github.com/en/free-pro-team@latest/rest/rate-limit/rate-limit?apiVersion=2022-11-28) for further information.
 You can generate the access token in your [GitHub settings](https://github.com/settings/tokens).
