@@ -1,6 +1,6 @@
 # GitHubFileFetcher
 
-<img align="right" width="150" height="150" src="doc/images/icon.png">
+<img align="right" width="150" height="150" alt="GitHubFileFetcher icon" src="doc/images/icon.png">
 
 **GitHubFileFetcher** is a Sublime Text package that searches and fetches files from GitHub.
 

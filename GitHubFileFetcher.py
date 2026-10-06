@@ -20,7 +20,6 @@ def plugin_loaded():
 
 
 class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
-
     search_owner_string = "-- Search Owner --"
     search_repo_string = "-- Search Repository --"
 
@@ -28,16 +27,20 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
     message = ""
     value = ""
 
-    found_repositories = []
     new_repo_found = 0
     owner_repository = ""
-    branches = []
     branch = ""
-    files = []
-    file = {}
-    folders = []
 
     def run(self):
+
+        self.found_repositories = []
+        self.branches = []
+        self.files = []
+        self.file = {}
+        self.folders = []
+        self.new_repo_found = 0
+        self.owner_repository = ""
+        self.branch = ""
 
         self.repositories = settings.get("repositories")
         self.information_messages = settings.get("information_messages")
@@ -52,9 +55,7 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
         # Status Message
         if self.information_messages != "false":
-            self.message = (
-                "GitHubFileFetcher (1/6): Fetching GitHub repositories."  # noqa: E501
-            )
+            self.message = "GitHubFileFetcher (1/6): Fetching GitHub repositories."
             sublime.status_message(self.message)
             print(self.message)
 
@@ -65,7 +66,7 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
             flags=32,
             selected_index=-1,
             on_highlight=None,
-            placeholder="GitHubFileFetcher (1/6): Search/Select GitHub repositories...",  # noqa: E501
+            placeholder="GitHubFileFetcher (1/6): Search/Select GitHub repositories...",
         )
 
     def repository_get(self, index):
@@ -91,12 +92,12 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
         if self.owner_repository == self.search_owner_string:
             self.value = "Owner"
-            self.message = "Enter GitHub %s. Example: dennykorsukewitz" % (self.value)
+            self.message = f"Enter GitHub {self.value}. Example: dennykorsukewitz"
 
         if self.owner_repository == self.search_repo_string:
             self.value = "Repositories"
-            self.message = "Enter GitHub %s. Example: VSCode-GitHubFileFetcher" % (
-                self.value
+            self.message = (
+                f"Enter GitHub {self.value}. Example: VSCode-GitHubFileFetcher"
             )
 
         # Create search_string input panel
@@ -110,6 +111,8 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
     def repository_search(self, search_string):
 
+        self.found_repositories = []
+
         if self.owner_repository == self.search_owner_string:
             search_string += "/"
 
@@ -118,9 +121,8 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
         # Log.
         if self.information_messages == "verbose":
-            self.message = "GitHubFileFetcher: Fetching %s from url: '%s'." % (
-                self.value,
-                url,
+            self.message = (
+                f"GitHubFileFetcher: Fetching {self.value} from url: '{url}'."
             )
             print(self.message)
 
@@ -130,7 +132,6 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
             self.found_repositories.append(repository["full_name"])
 
         if len(self.found_repositories) >= 1:
-
             self.new_repo_found = 1
 
             # New Repository selection
@@ -157,7 +158,7 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
     def branches_get(self):
 
-        url = "https://api.github.com/repos/%s/branches" % (self.owner_repository)
+        url = f"https://api.github.com/repos/{self.owner_repository}/branches"
 
         # Log
         if self.information_messages != "false":
@@ -166,9 +167,7 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
             print(self.message)
 
         if self.information_messages == "verbose":
-            self.message = "GitHubFileFetcher (2/6): Fetching branches from '%s'" % (
-                url
-            )
+            self.message = f"GitHubFileFetcher (2/6): Fetching branches from '{url}'"
             print(self.message)
 
         branches_json = self.url_json(url)
@@ -204,19 +203,14 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
         # Log
         if self.information_messages == "verbose":
-            self.message = "GitHubFileFetcher (2/6): Branch '%s' selected." % (
-                self.branch
-            )
+            self.message = f"GitHubFileFetcher (2/6): Branch '{self.branch}' selected."
             print(self.message)
 
         self.files_get()
 
     def files_get(self):
 
-        url = "https://api.github.com/repos/%s/git/trees/%s?recursive=1" % (
-            self.owner_repository,
-            self.branch,
-        )
+        url = f"https://api.github.com/repos/{self.owner_repository}/git/trees/{self.branch}?recursive=1"
 
         # Log
         if self.information_messages != "false":
@@ -225,10 +219,7 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
             print(self.message)
 
         if self.information_messages == "verbose":
-            self.message = (
-                "GitHubFileFetcher (3/6): Fetching files for branch '%s' from '%s'."
-                % (self.branch, url)
-            )
+            self.message = f"GitHubFileFetcher (3/6): Fetching files for branch '{self.branch}' from '{url}'."
             print(self.message)
 
         self.files = []
@@ -236,7 +227,6 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
         tree = self.url_json(url)
 
         for file in tree["tree"]:
-
             # skip folder names
             if file["type"] == "tree":
                 continue
@@ -245,10 +235,7 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
         # Log
         if self.information_messages == "verbose":
-            self.message = (
-                "GitHubFileFetcher (3/6): Showing file selection for branch '%s'."
-                % (self.branch)
-            )
+            self.message = f"GitHubFileFetcher (3/6): Showing file selection for branch '{self.branch}'."
             print(self.message)
 
         # File Selection
@@ -270,24 +257,14 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
         # Log
         if self.information_messages == "verbose":
-            self.message = (
-                "GitHubFileFetcher (3/6): Selected file '%s' from branch '%s'."
-                % (file_path, self.branch)
-            )
+            self.message = f"GitHubFileFetcher (3/6): Selected file '{file_path}' from branch '{self.branch}'."
             print(self.message)
 
-        url = "https://api.github.com/repos/%s/contents/%s?ref=%s" % (
-            self.owner_repository,
-            file_path,
-            self.branch,
-        )
+        url = f"https://api.github.com/repos/{self.owner_repository}/contents/{file_path}?ref={self.branch}"
 
         # Log
         if self.information_messages == "verbose":
-            self.message = (
-                "GitHubFileFetcher (3/6): Fetching file data for file: '%s' from branch: '%s' from url: '%s'."
-                % (file_path, self.branch, url)
-            )
+            self.message = f"GitHubFileFetcher (3/6): Fetching file data for file: '{file_path}' from branch: '{self.branch}' from url: '{url}'."
             print(self.message)
 
         file_json = self.url_json(url)
@@ -298,10 +275,7 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
         # Log
         if self.information_messages == "verbose":
-            self.message = (
-                "GitHubFileFetcher (3/6): Decoded file '%s' from branch '%s'. Adding custom header."
-                % (file_path, self.branch)
-            )
+            self.message = f"GitHubFileFetcher (3/6): Decoded file '{file_path}' from branch '{self.branch}'. Adding custom header."
             print(self.message)
 
         # Fix windows line endings
@@ -324,12 +298,10 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
         self.folders = self.window.folders()
 
         if len(self.folders) > 1:
-
             # Log
             if self.information_messages == "verbose":
-                self.message = (
-                    "GitHubFileFetcher (4/6): Showing folder selection for file '%s' from branch '%s'."
-                    % (self.file["path"], self.branch)
+                self.message = "GitHubFileFetcher (4/6): Showing folder selection for file '{}' from branch '{}'.".format(
+                    self.file["path"], self.branch
                 )
                 print(self.message)
 
@@ -364,9 +336,8 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
             print(self.message)
 
         if self.information_messages == "verbose":
-            self.message = (
-                "GitHubFileFetcher (5/6): Enter or change destination file path... '%s"
-                % (self.file["path"])
+            self.message = "GitHubFileFetcher (5/6): Enter or change destination file path... '{}".format(
+                self.file["path"]
             )
             print(self.message)
 
@@ -385,20 +356,24 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
         # Log
         if self.information_messages != "false":
-            self.message = "GitHubFileFetcher (6/6): Added file %s" % (
+            self.message = "GitHubFileFetcher (6/6): Added file {}".format(
                 self.file["path"]
             )
             sublime.status_message(self.message)
             print(self.message)
 
-        self.file["absolut_path"] = "%s/%s" % (self.file["folder"], self.file["path"])
+        self.file["absolut_path"] = "{}/{}".format(
+            self.file["folder"], self.file["path"]
+        )
 
         self.write_to_file()
 
         if self.information_messages == "verbose":
-            self.message = "GitHubFileFetcher: Opening file '%s' from branch '%s'." % (
-                self.file["path"],
-                self.branch,
+            self.message = (
+                "GitHubFileFetcher: Opening file '{}' from branch '{}'.".format(
+                    self.file["path"],
+                    self.branch,
+                )
             )
             print(self.message)
 
@@ -407,9 +382,8 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
         self.refresh_folders()
 
         if self.information_messages == "verbose":
-            self.message = (
-                "GitHubFileFetcher: Activating view for file '%s' from branch '%s'."
-                % (self.file["path"], self.branch)
+            self.message = "GitHubFileFetcher: Activating view for file '{}' from branch '{}'.".format(
+                self.file["path"], self.branch
             )
             print(self.message)
 
@@ -441,7 +415,7 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
             return
 
         if self.information_messages != "false":
-            self.message = "GitHubFileFetcher: Respository has been stored."
+            self.message = "GitHubFileFetcher: Repository has been stored."
             sublime.status_message(self.message)
             print(self.message)
 
@@ -465,25 +439,23 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
         directory = os.path.dirname(self.file["absolut_path"])
         if not os.path.exists(directory):
-
             if self.information_messages == "verbose":
                 sublime.status_message(
-                    "Creating folder structure '%s' for file '%s' from branch '%s'."
-                    % (directory, self.file["path"], self.branch)
-                )  # noqa: E501
+                    "Creating folder structure '{}' for file '{}' from branch '{}'.".format(
+                        directory, self.file["path"], self.branch
+                    )
+                )
             os.makedirs(directory)
 
         if self.information_messages == "verbose":
             sublime.status_message(
-                "Writing content to file '%s' from branch '%s'."
-                % (self.file["path"], self.branch)
+                "Writing content to file '{}' from branch '{}'.".format(
+                    self.file["path"], self.branch
+                )
             )
 
-        file_handle = codecs.open(self.file["absolut_path"], "w", "utf-8")
-        file_handle.write(self.file["content"])
-        file_handle.close()
-
-        return
+        with codecs.open(self.file["absolut_path"], "w", "utf-8") as file_handle:
+            file_handle.write(self.file["content"])
 
     def url_json(self, url):
 
@@ -491,11 +463,11 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
 
         # Log.
         if self.information_messages == "verbose":
-            self.message = "GitHubFileFetcher: Successfully fetch from '%s'" % (url)
+            self.message = f"GitHubFileFetcher: Successfully fetch from '{url}'"
             print(self.message)
 
         if self.information_messages == "verbose":
-            self.message = "GitHubFileFetcher: JSON Result: '%s'" % (json_result)
+            self.message = f"GitHubFileFetcher: JSON Result: '{json_result}'"
             print(self.message)
 
         return json.loads(json_result)
@@ -519,29 +491,25 @@ class GitHubFileFetcherCommand(sublime_plugin.WindowCommand):
             and len(github_username) > 0
             and len(github_token) > 0
         ):
-
-            credentials = "%s:%s" % (github_username, github_token)
+            credentials = f"{github_username}:{github_token}"
 
             credentials_base64 = base64.b64encode(credentials.encode("utf-8"))
 
             request.add_header(
-                "Authorization", "Basic %s" % credentials_base64.decode("utf-8")
+                "Authorization", "Basic {}".format(credentials_base64.decode("utf-8"))
             )
 
         # Attempt to open the url
         try:
-
             # Make our open request
             req = urlopen(request)
 
         except TypeError as err:
-
             # If the arguments are malformed, display the error
             return sublime.status_message(str(err))
 
         except URLError:
-
             # Otherwise, if there was a connection error, let it be known
-            return sublime.status_message("Error connecting to '%s'" % url)
+            return sublime.status_message(f"Error connecting to '{url}'")
 
         return req
