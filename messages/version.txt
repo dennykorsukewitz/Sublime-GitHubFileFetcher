@@ -1,7 +1,11 @@
-🌟 Version 1.0.2 🌟
+🌟 Version 1.1.0 🌟
 
-- Updated README.md.
-- Updated package structure [generator-sublime-package](https://github.com/dennykorsukewitz/generator-sublime-package).
+- Fix: URL-encode search text and file paths (spaces/special chars). Thanks to @dpc00 ([#1](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher/issues/1)).
+- Fix: reset repository search results between queries. Thanks to @dpc00 ([#2](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher/issues/2)).
+- Fix: failed GitHub HTTP responses no longer cause AttributeError on read. Thanks to @dpc00 ([#3](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher/issues/3)).
+- Fix: clear message when no workspace folder is open. Thanks to @dpc00 ([#4](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher/issues/4)).
+- Fix: binary files decode without UnicodeDecodeError (replacement chars). Thanks to @dpc00 ([#5](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher/issues/5)).
+- Thanks to @Jah-yee ([#10](https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher/pull/10)) for contributing these fixes.
 
 GitHub link - https://github.com/dennykorsukewitz/Sublime-GitHubFileFetcher
 
