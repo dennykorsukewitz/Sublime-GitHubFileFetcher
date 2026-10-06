@@ -9,8 +9,12 @@ on:
     branches: ["dev", "dev-update"]
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
+permissions: {}
+
 jobs:
   Pages:
+    permissions:
+      contents: read
     uses: dennykorsukewitz/dennykorsukewitz/.github/workflows/reusable.pages.yml@dev
     secrets:
       PAT: ${{ secrets.PAT }}
