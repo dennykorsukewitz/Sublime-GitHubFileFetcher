@@ -6,6 +6,17 @@ on:
   pull_request:
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
+permissions: {}
+
 jobs:
   Lint:
+    permissions:
+      contents: read
+      packages: read
+      pull-requests: read
+      statuses: write
     uses: dennykorsukewitz/dennykorsukewitz/.github/workflows/reusable.lint.yml@dev
+    with:
+      VALIDATE_BIOME_FORMAT: "false"
+      VALIDATE_BIOME_LINT: "false"
+      VALIDATE_PYTHON_BLACK: "false"

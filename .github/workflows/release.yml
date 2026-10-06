@@ -1,0 +1,17 @@
+---
+name: Release
+
+on:
+  push:
+    tags:
+      - "*"
+
+  workflow_dispatch:
+
+jobs:
+  Release:
+    permissions:
+      contents: write
+    uses: dennykorsukewitz/dennykorsukewitz/.github/workflows/reusable.release.sublime.yml@dev
+    secrets:
+      PAT: ${{ secrets.PAT }}
